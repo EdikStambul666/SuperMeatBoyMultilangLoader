@@ -12,8 +12,13 @@ jobs:
       - name: Download source
         uses: actions/checkout@v4
 
-      - name: Install .NET Framework 4.0 reference assemblies
-        run: nuget install Microsoft.NETFramework.ReferenceAssemblies.net40 -Version 1.0.3 -OutputDirectory packages
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Install .NET Framework 4.0
+        shell: cmd
+        run: |
+          nuget install Microsoft.NETFramework.ReferenceAssemblies.net40 -Version 1.0.3 -OutputDirectory packages
 
       - name: Build x86 Release
         shell: cmd
